@@ -19,7 +19,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.mrqx.sbr_inme.SlashBladeResharpedINeedMoreEnchantment;
 import net.mrqx.sbr_inme.SlashBladeResharpedINeedMoreEnchantmentConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -80,13 +79,6 @@ public abstract class MixinBlandStandEventHandler {
                                                         EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade)),
                                                 EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade)
                                                         + bonusLevel);
-
-                                        SlashBladeResharpedINeedMoreEnchantment.LOGGER
-                                                .debug("probability:{}, maxLevel:{}, bonusLevel:{}, enchantLevel:{}",
-                                                        probability,
-                                                        maxLevel,
-                                                        bonusLevel,
-                                                        enchantLevel);
 
                                         currentBladeEnchantments.put(enchantment, enchantLevel);
                                         EnchantmentHelper.setEnchantments(currentBladeEnchantments, blade);

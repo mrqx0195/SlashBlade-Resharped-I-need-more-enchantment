@@ -50,9 +50,9 @@ public class SlashBladeResharpedINeedMoreEnchantmentConfig {
                                                                 List.of("slashblade:proudsoul_tiny", 1.0),
                                                                 List.of("slashblade:proudsoul", 1.0),
                                                                 List.of("slashblade:proudsoul_ingot", 2.0),
-                                                                List.of("slashblade:proudsoul_sphere", 2.0),
-                                                                List.of("slashblade:proudsoul_crystal", 2.0),
-                                                                List.of("slashblade:proudsoul_trapezohedron", 2.0)),
+                                                                List.of("slashblade:proudsoul_sphere", 2.5),
+                                                                List.of("slashblade:proudsoul_crystal", 3.0),
+                                                                List.of("slashblade:proudsoul_trapezohedron", 4.0)),
                                                 it -> it instanceof List<?> list && list.size() == 2
                                                                 && list.get(0) instanceof String
                                                                 && list.get(1) instanceof Double
