@@ -21,7 +21,7 @@ group = mod_group_id
 apply plugin: 'org.spongepowered.mixin'
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_file_name}-${minecraft_version}"
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -134,9 +134,8 @@ repositories {
 
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
-    maven {
-        name 'MMMaven'
-        url 'https://raw.github.com/0999312/MMMaven/main/repository'
+    flatDir {
+        dir 'libs'
     }
 }
 
@@ -158,7 +157,8 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-    implementation fg.deobf("mods.flammpfeil.slashblade:SlashBlade_Resharped:${slash_blade_version}")
+    implementation fg.deobf("blank:SlashBladeResharped-${minecraft_version}:${slash_blade_version}")
+    implementation fg.deobf("blank:mrqxs_Slashblade_Core-${minecraft_version}:${mrqx_slash_blade_core_version}")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
@@ -176,7 +176,8 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description, slash_blade_version: slash_blade_version,
-            slash_blade_version_range: slash_blade_version_range,
+            slash_blade_version_range: slash_blade_version_range,mrqx_slash_blade_core_version: mrqx_slash_blade_core_version,
+            mrqx_slash_blade_core_version_range: mrqx_slash_blade_core_version_range,mod_file_name: mod_file_name,
     ]
     inputs.properties replaceProperties
 

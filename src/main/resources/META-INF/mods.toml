@@ -26,3 +26,10 @@ description='''${mod_description}'''
     versionRange="${slash_blade_version_range}"
     ordering="NONE"
     side="BOTH"
+    
+[[dependencies.${mod_id}]]
+    modId="sbr_core"
+    mandatory=true
+    versionRange="${mrqx_slash_blade_core_version_range}"
+    ordering="NONE"
+    side="BOTH"
