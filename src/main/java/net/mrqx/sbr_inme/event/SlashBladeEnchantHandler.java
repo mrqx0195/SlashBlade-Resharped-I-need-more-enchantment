@@ -36,8 +36,9 @@ public class SlashBladeEnchantHandler {
                     .get(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
         }
 
-        int enchantLevel = Math.min(Math.max(maxLevel, EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade)),
-                EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade) + bonusLevel);
+        int enchantLevel = EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade) <= 1 ? 1
+                : Math.min(Math.max(maxLevel, EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade)),
+                        EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade) + bonusLevel);
 
         event.setEnchantLevel(enchantLevel);
     }
