@@ -5,6 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,13 +15,21 @@ import net.mrqx.sbr_inme.SlashBladeResharpedINeedMoreEnchantmentConfig;
 @EventBusSubscriber
 public class SlashBladeEnchantHandler {
     @SuppressWarnings("null")
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onProudSoulEnchantmentEvent(MrqxSlashBladeEvents.ProudSoulEnchantmentEvent event) {
         Enchantment enchantment = event.getEnchantment();
         int maxLevel = enchantment.getMaxLevel();
         Player player = (Player) event.getOriginalEvent().getDamageSource().getEntity();
         ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
         ItemStack blade = event.getBlade();
+        Double probability = 1.0;
+
+        if (SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_CHANCE_MAP
+                .containsKey(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString())) {
+            probability = SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_CHANCE_MAP
+                    .get(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
+        }
+        event.setProbability(probability.floatValue());
 
         if (SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_MULTIPLIER_MAP.containsKey(
                 ForgeRegistries.ITEMS.getKey(stack.getItem()).toString())) {

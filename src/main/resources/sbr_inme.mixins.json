@@ -2,8 +2,9 @@
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "mixins": [
-    "MixinBladeStandEventHandler"
+    "MixinAbstractCookingRecipe"
   ],
   "package": "net.mrqx.sbr_inme.mixin",
+  "refmap": "sbr_inme.refmap.json",
   "required": true
 }

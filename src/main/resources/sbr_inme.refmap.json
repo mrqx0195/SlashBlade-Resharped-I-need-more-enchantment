@@ -1,0 +1,14 @@
+{
+    "data": {
+        "searge": {
+            "net/mrqx/sbr_inme/mixin/MixinAbstractCookingRecipe": {
+                "assemble": "Lnet/minecraft/world/item/crafting/AbstractCookingRecipe;m_5874_(Lnet/minecraft/world/Container;Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;"
+            }
+        }
+    },
+    "mappings": {
+        "net/mrqx/sbr_inme/mixin/MixinAbstractCookingRecipe": {
+            "assemble": "Lnet/minecraft/world/item/crafting/AbstractCookingRecipe;m_5874_(Lnet/minecraft/world/Container;Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;"
+        }
+    }
+}
