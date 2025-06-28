@@ -17,8 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(AbstractCookingRecipe.class)
 public abstract class MixinAbstractCookingRecipe implements Recipe<Container> {
     @Inject(method = "assemble", at = @At(value = "RETURN"), cancellable = true)
-    private void injectAssemble(Container p_43746_, RegistryAccess p_267063_,
-            CallbackInfoReturnable<ItemStack> cir) {
+    private void injectAssemble(Container p_43746_, RegistryAccess p_267063_, CallbackInfoReturnable<ItemStack> cir) {
         ItemStack result = cir.getReturnValue();
         Map<Enchantment, Integer> all = Maps.newHashMap();
 

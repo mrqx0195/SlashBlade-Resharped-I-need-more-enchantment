@@ -20,6 +20,9 @@ public class SlashBladeEnchantHandler {
         Enchantment enchantment = event.getEnchantment();
         int maxLevel = enchantment.getMaxLevel();
         Player player = (Player) event.getOriginalEvent().getDamageSource().getEntity();
+        if (player == null) {
+            return;
+        }
         ItemStack stack = player.getItemInHand(InteractionHand.MAIN_HAND);
         ItemStack blade = event.getBlade();
         Double probability = 1.0;
@@ -47,7 +50,7 @@ public class SlashBladeEnchantHandler {
 
         int enchantLevel = EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade) <= 1 ? 1
                 : Math.min(Math.max(maxLevel, EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade)),
-                        EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade) + bonusLevel);
+                EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade) + bonusLevel);
 
         event.setEnchantLevel(enchantLevel);
     }
