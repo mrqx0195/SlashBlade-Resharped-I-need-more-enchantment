@@ -1,5 +1,6 @@
 package net.mrqx.sbr_inme.event;
 
+import mods.flammpfeil.slashblade.event.bladestand.ProudSoulEnchantmentEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -9,17 +10,21 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.mrqx.sbr_core.events.MrqxSlashBladeEvents;
 import net.mrqx.sbr_inme.SlashBladeResharpedINeedMoreEnchantmentConfig;
+
+import java.util.Objects;
 
 @EventBusSubscriber
 public class SlashBladeEnchantHandler {
     @SuppressWarnings("null")
     @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void onProudSoulEnchantmentEvent(MrqxSlashBladeEvents.ProudSoulEnchantmentEvent event) {
+    public static void onProudSoulEnchantmentEvent(ProudSoulEnchantmentEvent event) {
         Enchantment enchantment = event.getEnchantment();
         int maxLevel = enchantment.getMaxLevel();
-        Player player = (Player) event.getOriginalEvent().getDamageSource().getEntity();
+        Player player = null;
+        if (event.getOriginalEvent() != null) {
+            player = (Player) event.getOriginalEvent().getDamageSource().getEntity();
+        }
         if (player == null) {
             return;
         }
@@ -28,24 +33,24 @@ public class SlashBladeEnchantHandler {
         Double probability = 1.0;
 
         if (SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_CHANCE_MAP
-                .containsKey(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString())) {
+                .containsKey(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString())) {
             probability = SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_CHANCE_MAP
-                    .get(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
+                    .get(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString());
         }
         event.setProbability(probability.floatValue());
 
         if (SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_MULTIPLIER_MAP.containsKey(
-                ForgeRegistries.ITEMS.getKey(stack.getItem()).toString())) {
+                Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString())) {
             maxLevel = (int) (maxLevel * SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_MULTIPLIER_MAP
-                    .get(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString()));
+                    .get(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString()));
         }
 
         int bonusLevel = 1;
 
         if (SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_BONUS_MAP.containsKey(
-                ForgeRegistries.ITEMS.getKey(stack.getItem()).toString())) {
+                Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString())) {
             bonusLevel = bonusLevel + SlashBladeResharpedINeedMoreEnchantmentConfig.PROUDSOUL_ITEM_BONUS_MAP
-                    .get(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
+                    .get(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(stack.getItem())).toString());
         }
 
         int enchantLevel = EnchantmentHelper.getTagEnchantmentLevel(enchantment, blade) <= 1 ? 1
